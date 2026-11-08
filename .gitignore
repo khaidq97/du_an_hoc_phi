@@ -1,0 +1,7 @@
+# File cấu hình thật (chứa giá trị riêng của từng máy/môi trường, có thể có mật khẩu)
+.env
+
+# Rác của hệ điều hành và trình soạn thảo
+.DS_Store
+.idea/
+.vscode/

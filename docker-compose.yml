@@ -1,0 +1,51 @@
+# Chạy cả dự án bằng một lệnh, đứng ở thư mục này:
+#   docker compose up --build
+#
+#   Giao diện (frontend) : http://localhost:8080
+#   API (backend)        : http://localhost:8000
+#   Xem database (Adminer): http://localhost:8081
+name: hoc-phi
+
+include:
+  - db/docker-compose.yml   # service db (MySQL) và adminer
+
+services:
+  backend:
+    build: ./backend
+    image: hoc-phi-backend
+    container_name: hoc_phi_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mã nguồn backend nằm trên máy bạn; sửa file là container thấy ngay.
+      - ./backend:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "php", "-r", "exit(@file_get_contents('http://127.0.0.1:8000/up') === false ? 1 : 0);"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 120s
+
+  # Chạy các việc hẹn giờ của Laravel (ví dụ gửi email nhắc nợ mỗi ngày 08:00).
+  scheduler:
+    image: hoc-phi-backend
+    pull_policy: never
+    container_name: hoc_phi_scheduler
+    entrypoint: ["php", "artisan", "schedule:work"]
+    working_dir: /var/www/html
+    volumes:
+      - ./backend:/var/www/html
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  frontend:
+    image: nginx:alpine
+    container_name: hoc_phi_frontend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro

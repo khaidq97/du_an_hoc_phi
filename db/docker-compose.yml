@@ -1,0 +1,44 @@
+# Database của dự án: MySQL 8 và Adminer (trang web xem bảng dữ liệu).
+#
+# Chạy riêng database (backend chạy PHP trực tiếp trên máy):
+#   docker compose -f db/docker-compose.yml up -d
+# Chạy cả dự án: xem docker-compose.yml ở thư mục gốc (file đó "include" file này).
+#
+# Giá trị sau dấu :- là giá trị MẶC ĐỊNH CHO MÁY HỌC. Môi trường thật phải đặt giá trị riêng
+# (tạo file .env ở thư mục gốc, xem .env.example) và không đưa mật khẩu thật lên repo.
+services:
+  db:
+    image: mysql:8.4
+    container_name: hoc_phi_db
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-hoc_phi}
+      MYSQL_USER: ${DB_USERNAME:-hoc_phi_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-hoc_phi_pass_dev}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_pass_dev}
+      TZ: Asia/Ho_Chi_Minh
+    ports:
+      # Cổng bên trái là cổng trên máy bạn, cổng bên phải là cổng MySQL trong container.
+      - "${DB_PORT_HOST:-3306}:3306"
+    volumes:
+      # Dữ liệu nằm trong volume nên tắt máy, bật lại vẫn còn.
+      - hoc_phi_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  adminer:
+    image: adminer:4
+    container_name: hoc_phi_adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    ports:
+      - "${ADMINER_PORT_HOST:-8081}:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  hoc_phi_db_data:

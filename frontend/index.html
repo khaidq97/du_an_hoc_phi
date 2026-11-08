@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <title>Hoc Phi</title>
+    <!-- Trang gốc: chưa đăng nhập thì sang trang đăng nhập, đăng nhập rồi thì sang danh sách hóa đơn. -->
+    <script src="js/config.js"></script>
+    <script>
+        window.location.replace(localStorage.getItem("token") ? "hoa-don.html" : "dang-nhap.html");
+    </script>
+</head>
+<body></body>
+</html>

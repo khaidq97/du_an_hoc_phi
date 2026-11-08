@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Danh sách hóa đơn - Hoc Phi</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="thanh-tren">
+        <strong>Hoc Phi</strong>
+        <span>
+            <span id="thong-tin-nguoi-dung"></span>
+            <button id="nut-dang-xuat" type="button" class="nut-phu">Đăng xuất</button>
+        </span>
+    </header>
+
+    <main class="hop">
+        <h1>Danh sách hóa đơn</h1>
+
+        <div id="thong-bao" class="thong-bao" hidden></div>
+
+        <!-- Chỉ kế toán thấy khung này (JS bỏ thuộc tính hidden). Backend vẫn kiểm tra quyền, không tin giao diện. -->
+        <section id="khung-tao-hoa-don" class="khung" hidden>
+            <h2>Tạo hóa đơn mới</h2>
+            <form id="form-tao-hoa-don" class="hang-form">
+                <div>
+                    <label for="ma_hoa_don">Mã hóa đơn</label>
+                    <input id="ma_hoa_don" name="ma_hoa_don" type="text" required maxlength="20" placeholder="HD006">
+                </div>
+                <div>
+                    <label for="hoc_vien_id">Học viên</label>
+                    <select id="hoc_vien_id" name="hoc_vien_id" required></select>
+                </div>
+                <div>
+                    <label for="so_tien">Số tiền (đồng)</label>
+                    <input id="so_tien" name="so_tien" type="number" required min="1" step="1" placeholder="2000000">
+                </div>
+                <button type="submit">Tạo hóa đơn</button>
+            </form>
+        </section>
+
+        <div class="cuon-ngang">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã hóa đơn</th>
+                        <th>Học viên</th>
+                        <th class="so">Số tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Ngày thu</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="bang-hoa-don"></tbody>
+            </table>
+        </div>
+
+        <nav class="phan-trang">
+            <button id="nut-trang-truoc" type="button" class="nut-phu">Trang trước</button>
+            <span id="so-trang"></span>
+            <button id="nut-trang-sau" type="button" class="nut-phu">Trang sau</button>
+        </nav>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/hoa-don.js"></script>
+</body>
+</html>
