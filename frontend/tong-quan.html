@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tổng quan - Hoc Phi</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="ung-dung">
+        <aside class="thanh-ben" id="thanh-ben"></aside>
+
+        <div class="phan-chinh">
+            <header class="thanh-tren" id="thanh-tren"></header>
+
+            <main class="noi-dung">
+                <div class="tieu-de-trang">
+                    <div>
+                        <h1 id="loi-chao">Tổng quan</h1>
+                        <p id="ngay-hom-nay"></p>
+                    </div>
+                    <div class="nhom-nut" id="nut-nhanh" hidden>
+                        <a class="nut nut-chinh" href="hoa-don.html?tao=1" id="nut-tao-hoa-don"></a>
+                    </div>
+                </div>
+
+                <div id="thong-bao" class="thong-bao loi" hidden role="alert"></div>
+
+                <section class="luoi-so" id="luoi-so" aria-label="Số liệu chính"></section>
+
+                <div class="luoi-hai">
+                    <section class="the" aria-labelledby="tieu-de-bieu-do">
+                        <div class="the-dau">
+                            <div>
+                                <h2 id="tieu-de-bieu-do">Thu học phí 6 tháng gần nhất</h2>
+                                <p>Tiền đã lập hóa đơn so với tiền đã thu, theo tháng</p>
+                            </div>
+                            <div class="chu-thich"><span><i class="lap"></i>Đã lập</span><span><i></i>Đã thu</span></div>
+                        </div>
+                        <div class="the-than" id="khung-bieu-do"><div class="xuong" style="height:240px"></div></div>
+                    </section>
+
+                    <section class="the" aria-labelledby="tieu-de-vong">
+                        <div class="the-dau">
+                            <div>
+                                <h2 id="tieu-de-vong">Tình trạng thu</h2>
+                                <p>Theo số tiền</p>
+                            </div>
+                        </div>
+                        <div class="the-than" id="khung-vong"><div class="xuong" style="height:240px"></div></div>
+                    </section>
+                </div>
+
+                <section class="the" aria-labelledby="tieu-de-gan-day">
+                    <div class="the-dau" style="padding-bottom:8px">
+                        <div>
+                            <h2 id="tieu-de-gan-day">Hóa đơn gần đây</h2>
+                            <p>5 hóa đơn mới nhất</p>
+                        </div>
+                        <a href="hoa-don.html" class="nut nut-phu nut-nho">Xem tất cả</a>
+                    </div>
+                    <div class="cuon-ngang">
+                        <table class="dang-the">
+                            <thead>
+                                <tr><th>Mã hóa đơn</th><th>Học viên</th><th class="so">Số tiền</th><th>Trạng thái</th><th>Ngày tạo</th></tr>
+                            </thead>
+                            <tbody id="bang-gan-day"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/khung.js"></script>
+    <script src="js/tong-quan.js"></script>
+</body>
+</html>

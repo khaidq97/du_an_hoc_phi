@@ -44,11 +44,24 @@ function layThongBaoLoi(ketQua) {
     return du_lieu.thong_bao || du_lieu.message || "Có lỗi xảy ra";
 }
 
-// Hiện thông báo trong khung có id "thong-bao". Thành công màu xanh, lỗi màu đỏ.
+// Hiện thông báo trong khung có id "thong-bao" (trang đăng nhập, đăng ký).
+// Thành công màu xanh, lỗi màu đỏ. Trang không có khung đó thì hiện dạng toast (xem khung.js).
 function hienThongBao(noiDung, laLoi) {
     const khung = document.getElementById("thong-bao");
+
+    if (!khung) {
+        hienToast(noiDung, laLoi);
+        return;
+    }
 
     khung.textContent = noiDung; // textContent: không bao giờ chạy mã HTML lạ
     khung.className = "thong-bao " + (laLoi ? "loi" : "thanh-cong");
     khung.hidden = false;
+}
+
+// Hỏi backend đang chạy ở môi trường nào (local, testing, staging, production).
+// Trả null nếu không kết nối được. Backend chỉ trả thông tin không bí mật.
+async function taiThongTinHeThong() {
+    const ketQua = await goiApi("/he-thong");
+    return ketQua.ok ? ketQua.du_lieu : null;
 }

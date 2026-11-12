@@ -13,9 +13,11 @@ class HoaDonResource extends JsonResource
         return [
             'id' => $this->id,
             'ma_hoa_don' => $this->ma_hoa_don,
+            'hoc_vien_id' => $this->hoc_vien_id,
             'hoc_vien' => $this->hocVien?->ten,
             'so_tien' => $this->so_tien,
             'trang_thai' => $this->trang_thai,
+            'ngay_tao' => $this->created_at?->format('d/m/Y'),
             'ngay_thu' => $this->ngay_thu?->format('d/m/Y'),
         ];
     }

@@ -7,29 +7,54 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <main class="hop hop-nho">
-        <h1>Đăng ký tài khoản học viên</h1>
+    <div class="xac-thuc">
+        <aside class="xac-thuc-banner">
+            <div class="logo"><span class="logo-hinh" id="logo-banner"></span>Hoc Phi</div>
+            <div>
+                <h2>Tạo tài khoản học viên.</h2>
+                <p>Đăng ký bằng đúng email mà trung tâm đã ghi nhận để thấy hóa đơn của bạn ngay lập tức.</p>
+                <ul>
+                    <li data-bieu-tuong="dung">Xem hóa đơn đã đóng và chưa đóng</li>
+                    <li data-bieu-tuong="dung">Nhận email nhắc khi sắp đến hạn</li>
+                    <li data-bieu-tuong="dung">Mật khẩu được mã hóa, không ai đọc được</li>
+                </ul>
+            </div>
+            <p class="ghi-chu" style="color:rgba(255,255,255,.7)">Dự án mẫu cho lớp BrSE. Toàn bộ là dữ liệu giả.</p>
+        </aside>
 
-        <div id="thong-bao" class="thong-bao" hidden></div>
+        <main class="xac-thuc-form">
+            <div>
+                <div id="cho-moi-truong"></div>
+                <h1>Đăng ký</h1>
+                <p class="ghi-chu" style="margin-top:6px">Chỉ mất một phút. Không dùng mật khẩu thật của bạn ở hệ thống mẫu này.</p>
 
-        <form id="form-dang-ky">
-            <label for="ten">Họ tên</label>
-            <input id="ten" name="ten" type="text" required maxlength="100">
+                <div id="thong-bao" class="thong-bao" hidden role="alert"></div>
 
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required autocomplete="username">
+                <form id="form-dang-ky">
+                    <label class="truong">
+                        <span class="ten">Họ và tên</span>
+                        <input id="ten" name="ten" type="text" required maxlength="100" autocomplete="name" placeholder="Nguyễn Văn A">
+                    </label>
+                    <label class="truong">
+                        <span class="ten">Email</span>
+                        <input id="email" name="email" type="email" required autocomplete="username" placeholder="ten@example.com">
+                    </label>
+                    <label class="truong">
+                        <span class="ten">Mật khẩu</span>
+                        <input id="password" name="password" type="password" required minlength="8" autocomplete="new-password" placeholder="Ít nhất 8 ký tự">
+                        <small>Dùng ít nhất 8 ký tự.</small>
+                    </label>
+                    <button type="submit" class="nut nut-chinh">Tạo tài khoản</button>
+                </form>
 
-            <label for="password">Mật khẩu (ít nhất 8 ký tự)</label>
-            <input id="password" name="password" type="password" required minlength="8" autocomplete="new-password">
-
-            <button type="submit">Đăng ký</button>
-        </form>
-
-        <p class="ghi-chu">Đã có tài khoản? <a href="dang-nhap.html">Đăng nhập</a></p>
-    </main>
+                <p class="ghi-chu">Đã có tài khoản? <a href="dang-nhap.html">Đăng nhập</a></p>
+            </div>
+        </main>
+    </div>
 
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
+    <script src="js/khung.js"></script>
     <script src="js/dang-ky.js"></script>
 </body>
 </html>

@@ -120,7 +120,7 @@ class DangKyDangNhapTest extends TestCase
         $this->seed(DatabaseSeeder::class);
 
         $this->assertDatabaseCount('tai_khoan', 3);
-        $this->assertDatabaseCount('hoc_vien', 3);
-        $this->assertDatabaseCount('hoa_don', 5);
+        $this->assertDatabaseCount('hoc_vien', 5);
+        $this->assertDatabaseCount('hoa_don', 13);
     }
 }

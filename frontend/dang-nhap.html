@@ -8,27 +8,58 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <main class="hop hop-nho">
-        <h1>Đăng nhập</h1>
-        <p class="ghi-chu">Hệ thống thu học phí (dữ liệu giả, dùng cho lớp học).</p>
+    <div class="xac-thuc">
+        <aside class="xac-thuc-banner">
+            <div class="logo"><span class="logo-hinh" id="logo-banner"></span>Hoc Phi</div>
+            <div>
+                <h2>Thu học phí gọn gàng, rõ ràng.</h2>
+                <p>Theo dõi hóa đơn, ghi nhận đóng tiền và nhắc học viên chưa đóng, tất cả ở một nơi.</p>
+                <ul>
+                    <li data-bieu-tuong="dung">Kế toán xem toàn bộ hóa đơn trong một bảng</li>
+                    <li data-bieu-tuong="dung">Học viên chỉ thấy hóa đơn của chính mình</li>
+                    <li data-bieu-tuong="dung">Hệ thống tự gửi email nhắc lúc 08:00 mỗi ngày</li>
+                </ul>
+            </div>
+            <p class="ghi-chu" style="color:rgba(255,255,255,.7)">Dự án mẫu cho lớp BrSE. Toàn bộ là dữ liệu giả.</p>
+        </aside>
 
-        <div id="thong-bao" class="thong-bao" hidden></div>
+        <main class="xac-thuc-form">
+            <div>
+                <div id="cho-moi-truong"></div>
+                <h1>Đăng nhập</h1>
+                <p class="ghi-chu" style="margin-top:6px">Chào mừng quay lại. Nhập tài khoản của bạn để tiếp tục.</p>
 
-        <form id="form-dang-nhap">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required autocomplete="username">
+                <div id="thong-bao" class="thong-bao" hidden role="alert"></div>
 
-            <label for="password">Mật khẩu</label>
-            <input id="password" name="password" type="password" required autocomplete="current-password">
+                <form id="form-dang-nhap">
+                    <label class="truong">
+                        <span class="ten">Email</span>
+                        <input id="email" name="email" type="email" required autocomplete="username" placeholder="ten@example.com">
+                    </label>
+                    <label class="truong">
+                        <span class="ten">Mật khẩu</span>
+                        <input id="password" name="password" type="password" required autocomplete="current-password" placeholder="••••••••">
+                    </label>
+                    <button type="submit" class="nut nut-chinh">Đăng nhập</button>
+                </form>
 
-            <button type="submit">Đăng nhập</button>
-        </form>
+                <p class="ghi-chu">Chưa có tài khoản? <a href="dang-ky.html">Đăng ký</a></p>
 
-        <p class="ghi-chu">Chưa có tài khoản? <a href="dang-ky.html">Đăng ký</a></p>
-    </main>
+                <!-- Chỉ hiện ở môi trường local (JS kiểm tra), nơi có dữ liệu mẫu. Mật khẩu demo xem README. -->
+                <div class="goi-y-demo" id="goi-y-demo" hidden>
+                    <b>Tài khoản demo</b> (chỉ có ở môi trường Local). Mật khẩu xem trong README.
+                    <div class="nhom-nut" style="margin-top:10px">
+                        <button type="button" class="nut nut-phu nut-nho" data-email="ketoan@example.com">Kế toán</button>
+                        <button type="button" class="nut nut-phu nut-nho" data-email="an@example.com">Học viên An</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
+    <script src="js/khung.js"></script>
     <script src="js/dang-nhap.js"></script>
 </body>
 </html>

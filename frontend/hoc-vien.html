@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Học viên - Hoc Phi</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="ung-dung">
+        <aside class="thanh-ben" id="thanh-ben"></aside>
+
+        <div class="phan-chinh">
+            <header class="thanh-tren" id="thanh-tren"></header>
+
+            <main class="noi-dung">
+                <div class="tieu-de-trang">
+                    <div>
+                        <h1>Học viên</h1>
+                        <p>Hồ sơ học viên và tình hình đóng học phí của từng người.</p>
+                    </div>
+                    <div class="nhom-nut">
+                        <button type="button" class="nut nut-chinh" id="nut-them"></button>
+                    </div>
+                </div>
+
+                <section class="the" aria-label="Danh sách học viên">
+                    <div class="thanh-loc">
+                        <label class="o-tim">
+                            <span class="chi-doc-man-hinh">Tìm học viên</span>
+                            <span id="bieu-tuong-tim"></span>
+                            <input id="o-tim" type="search" placeholder="Tìm theo tên hoặc email" autocomplete="off">
+                        </label>
+                        <span class="ghi-chu" id="dem-hoc-vien"></span>
+                    </div>
+
+                    <div class="cuon-ngang" aria-live="polite">
+                        <table class="dang-the">
+                            <thead>
+                                <tr>
+                                    <th>Học viên</th>
+                                    <th>Tài khoản</th>
+                                    <th class="so">Hóa đơn</th>
+                                    <th class="so">Đã thu</th>
+                                    <th class="so">Chưa thu</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="bang-hoc-vien"></tbody>
+                        </table>
+                        <div id="trang-thai-rong" hidden></div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/khung.js"></script>
+    <script src="js/hoc-vien.js"></script>
+</body>
+</html>

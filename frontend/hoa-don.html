@@ -3,68 +3,93 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Danh sách hóa đơn - Hoc Phi</title>
+    <title>Hóa đơn - Hoc Phi</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="thanh-tren">
-        <strong>Hoc Phi</strong>
-        <span>
-            <span id="thong-tin-nguoi-dung"></span>
-            <button id="nut-dang-xuat" type="button" class="nut-phu">Đăng xuất</button>
-        </span>
-    </header>
+    <div class="ung-dung">
+        <aside class="thanh-ben" id="thanh-ben"></aside>
 
-    <main class="hop">
-        <h1>Danh sách hóa đơn</h1>
+        <div class="phan-chinh">
+            <header class="thanh-tren" id="thanh-tren"></header>
 
-        <div id="thong-bao" class="thong-bao" hidden></div>
-
-        <!-- Chỉ kế toán thấy khung này (JS bỏ thuộc tính hidden). Backend vẫn kiểm tra quyền, không tin giao diện. -->
-        <section id="khung-tao-hoa-don" class="khung" hidden>
-            <h2>Tạo hóa đơn mới</h2>
-            <form id="form-tao-hoa-don" class="hang-form">
-                <div>
-                    <label for="ma_hoa_don">Mã hóa đơn</label>
-                    <input id="ma_hoa_don" name="ma_hoa_don" type="text" required maxlength="20" placeholder="HD006">
+            <main class="noi-dung">
+                <div class="tieu-de-trang">
+                    <div>
+                        <h1>Hóa đơn</h1>
+                        <p id="mo-ta-trang"></p>
+                    </div>
+                    <!-- Chỉ kế toán thấy hai nút này (JS bỏ thuộc tính hidden). Backend vẫn kiểm tra quyền, không tin giao diện. -->
+                    <div class="nhom-nut" id="nut-ke-toan" hidden>
+                        <button type="button" class="nut nut-phu" id="nut-tai-csv"></button>
+                        <button type="button" class="nut nut-chinh" id="nut-tao"></button>
+                    </div>
                 </div>
-                <div>
-                    <label for="hoc_vien_id">Học viên</label>
-                    <select id="hoc_vien_id" name="hoc_vien_id" required></select>
-                </div>
-                <div>
-                    <label for="so_tien">Số tiền (đồng)</label>
-                    <input id="so_tien" name="so_tien" type="number" required min="1" step="1" placeholder="2000000">
-                </div>
-                <button type="submit">Tạo hóa đơn</button>
-            </form>
-        </section>
 
-        <div class="cuon-ngang">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Mã hóa đơn</th>
-                        <th>Học viên</th>
-                        <th class="so">Số tiền</th>
-                        <th>Trạng thái</th>
-                        <th>Ngày thu</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="bang-hoa-don"></tbody>
-            </table>
+                <section class="the" aria-label="Danh sách hóa đơn">
+                    <div class="thanh-loc">
+                        <label class="o-tim">
+                            <span class="chi-doc-man-hinh">Tìm hóa đơn</span>
+                            <span id="bieu-tuong-tim"></span>
+                            <input id="o-tim" type="search" placeholder="Tìm mã hóa đơn hoặc học viên" autocomplete="off">
+                        </label>
+
+                        <div class="phan-doan" role="group" aria-label="Lọc theo trạng thái" id="loc-trang-thai">
+                            <button type="button" data-gia-tri="" aria-pressed="true">Tất cả</button>
+                            <button type="button" data-gia-tri="chua_dong" aria-pressed="false">Chưa đóng</button>
+                            <button type="button" data-gia-tri="da_dong" aria-pressed="false">Đã đóng</button>
+                        </div>
+
+                        <div class="nhom-ngay">
+                            <label>Từ <input id="tu-ngay" type="date"></label>
+                            <label>đến <input id="den-ngay" type="date"></label>
+                        </div>
+
+                        <button type="button" class="nut nut-phu nut-nho" id="nut-xoa-loc" hidden>Xóa bộ lọc</button>
+                    </div>
+
+                    <div class="cuon-ngang" aria-live="polite" aria-busy="false" id="vung-bang">
+                        <table class="dang-the">
+                            <thead>
+                                <tr>
+                                    <th>Mã hóa đơn</th>
+                                    <th>Học viên</th>
+                                    <th class="so">Số tiền</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Ngày thu</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="bang-hoa-don"></tbody>
+                        </table>
+                        <div id="trang-thai-rong" hidden></div>
+                    </div>
+
+                    <nav class="phan-trang" aria-label="Phân trang" id="phan-trang" hidden>
+                        <span id="thong-ke-trang"></span>
+                        <div class="dieu-khien">
+                            <label class="ghi-chu">Số dòng
+                                <select id="so-dong">
+                                    <option>10</option>
+                                    <option selected>15</option>
+                                    <option>25</option>
+                                    <option>50</option>
+                                </select>
+                            </label>
+                            <button type="button" class="nut nut-phu nut-nho" id="nut-trang-truoc" aria-label="Trang trước"></button>
+                            <span id="so-trang"></span>
+                            <button type="button" class="nut nut-phu nut-nho" id="nut-trang-sau" aria-label="Trang sau"></button>
+                        </div>
+                    </nav>
+                </section>
+            </main>
         </div>
-
-        <nav class="phan-trang">
-            <button id="nut-trang-truoc" type="button" class="nut-phu">Trang trước</button>
-            <span id="so-trang"></span>
-            <button id="nut-trang-sau" type="button" class="nut-phu">Trang sau</button>
-        </nav>
-    </main>
+    </div>
 
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
+    <script src="js/khung.js"></script>
     <script src="js/hoa-don.js"></script>
 </body>
 </html>

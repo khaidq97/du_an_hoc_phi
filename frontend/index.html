@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <title>Hoc Phi</title>
-    <!-- Trang gốc: chưa đăng nhập thì sang trang đăng nhập, đăng nhập rồi thì sang danh sách hóa đơn. -->
+    <!-- Trang gốc: chưa đăng nhập thì sang trang đăng nhập, đăng nhập rồi thì sang trang Tổng quan. -->
     <script src="js/config.js"></script>
     <script>
-        window.location.replace(localStorage.getItem("token") ? "hoa-don.html" : "dang-nhap.html");
+        window.location.replace(localStorage.getItem("token") ? "tong-quan.html" : "dang-nhap.html");
     </script>
 </head>
 <body></body>

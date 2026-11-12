@@ -22,6 +22,9 @@ class ThongBaoLoi
             'integer' => ':attribute phải là số nguyên',
             'string' => ':attribute phải là chữ',
             'exists' => ':attribute không tồn tại',
+            'unique' => ':attribute đã được sử dụng',
+            'in' => ':attribute không hợp lệ',
+            'date_format' => ':attribute phải đúng dạng năm-tháng-ngày (ví dụ 2026-11-12)',
         ];
     }
 
@@ -34,6 +37,11 @@ class ThongBaoLoi
             'ma_hoa_don' => 'Mã hóa đơn',
             'hoc_vien_id' => 'Học viên',
             'so_tien' => 'Số tiền',
+            'q' => 'Từ khóa tìm kiếm',
+            'trang_thai' => 'Trạng thái',
+            'tu_ngay' => 'Từ ngày',
+            'den_ngay' => 'Đến ngày',
+            'per_page' => 'Số dòng mỗi trang',
         ];
     }
 }

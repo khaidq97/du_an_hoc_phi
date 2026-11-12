@@ -12,6 +12,15 @@ Hệ thống thu học phí cho một trung tâm đào tạo.
 | Học viên | Tự đăng ký tài khoản, đăng nhập, chỉ xem hóa đơn của chính mình |
 | Hệ thống | Mỗi ngày 08:00 tự gửi email nhắc học viên có hóa đơn chưa đóng |
 
+**Chức năng trên giao diện** (có đủ ở máy tính và điện thoại, tự đổi sáng/tối theo máy):
+
+| Trang | Ai dùng | Làm được gì |
+|---|---|---|
+| Tổng quan (`tong-quan.html`) | Kế toán, học viên | Thẻ số liệu (đã lập, đã thu, chưa thu), biểu đồ 6 tháng, vòng tỷ lệ thu, 5 hóa đơn gần đây. Học viên chỉ thấy số liệu của mình |
+| Hóa đơn (`hoa-don.html`) | Kế toán, học viên | Tìm theo mã hoặc tên học viên, lọc theo trạng thái và khoảng ngày, phân trang, chọn số dòng. Kế toán: tạo hóa đơn, ghi nhận đã thu, xóa (hóa đơn đã đóng bị khóa), **tải CSV** theo đúng bộ lọc. Bộ lọc nằm trên thanh địa chỉ nên gửi link là gửi cả bộ lọc |
+| Học viên (`hoc-vien.html`) | Chỉ kế toán | Danh sách, tìm kiếm, thêm, sửa hồ sơ, xem hóa đơn và tiền đã thu, chưa thu của từng học viên |
+| Nhãn môi trường | Mọi trang | Góc trên bên phải và dải màu đầu trang cho biết đang ở **Local, Test, Staging hay Production** (backend trả về `APP_ENV` qua `GET /api/he-thong`). Dùng để minh họa bài 5: "khách đang xem bản nào?" |
+
 **Quy tắc nghiệp vụ đã được cài đặt** (mỗi quy tắc có test trong `backend/tests/Feature/`):
 
 1. Mã hóa đơn không được trùng nhau.
@@ -71,9 +80,10 @@ project/
 │   ├── composer.json         danh sách thư viện PHP (nhận diện Laravel)
 │   └── artisan               công cụ dòng lệnh của Laravel (nhận diện Laravel)
 └── frontend/
-    ├── *.html                các trang: đăng nhập, đăng ký, danh sách hóa đơn
-    ├── css/style.css         giao diện
-    └── js/                   config.js (địa chỉ backend), api.js (gọi API), mỗi trang một file
+    ├── *.html                các trang: đăng nhập, đăng ký, tổng quan, hóa đơn, học viên
+    ├── css/style.css         giao diện (bảng màu và cỡ chữ ở đầu file; tự đổi sáng/tối)
+    └── js/                   config.js (địa chỉ backend), api.js (gọi API), khung.js (phần dùng chung:
+                              thanh bên, nhãn môi trường, thông báo, hộp thoại), mỗi trang một file
 ```
 
 Hai file cấu hình cần phân biệt, giống ví dụ trong bài giảng:
