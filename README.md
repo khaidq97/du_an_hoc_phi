@@ -175,8 +175,34 @@ Muốn trỏ hệ thống sang database khác, sửa các dòng `DB_...` trong *
 |---|---|---|
 | Local / Dev | Developer | Chạy bằng `docker compose up` như trên |
 | Testing | Tester | `php artisan test` (database SQLite tạm trong bộ nhớ) |
-| Staging | Khách hàng kiểm tra | Chưa có. Cần máy chủ riêng, `.env` riêng, database riêng |
-| Production | Người dùng cuối | Chưa có |
+| Staging | Khách hàng kiểm tra | Chưa có máy chủ. Có **file mẫu** `backend/.env.staging.example` |
+| Production | Người dùng cuối | Chưa có máy chủ. Có **file mẫu** `backend/.env.production.example` |
+
+**Thử các môi trường ngay trên máy** (dùng khi học bài 5): script `chuyen-moi-truong.sh` chép file mẫu thành `backend/.env`, khởi động lại backend rồi cho biết môi trường nào đang chạy.
+
+```bash
+./chuyen-moi-truong.sh staging      # giống Staging
+./chuyen-moi-truong.sh production   # giống Production
+./chuyen-moi-truong.sh local        # về máy dev
+```
+
+Mở http://localhost:8080 và nhìn **nhãn môi trường** (góc trên bên phải, và dải màu mỏng ở đầu trang): xám là Local, tím là Test, cam là Staging, đỏ là Production. Lưu ý khi thử:
+
+- Chỉ **mô phỏng**. Ở máy học mọi môi trường dùng chung một database Docker; script giữ nguyên kết nối database của máy bạn. Staging và Production thật là máy chủ riêng, `.env` riêng, database riêng.
+- Ở Staging và Production, **dữ liệu mẫu không được nạp** (chỉ nạp khi `APP_ENV=local`), nên không có tài khoản demo mới. Dữ liệu đã nạp lúc chạy Local vẫn còn trong database.
+- Script ép `MAIL_MAILER=log`: email **không gửi ra ngoài** dù chọn môi trường nào.
+- `APP_DEBUG=false` ở Staging và Production: thử gây lỗi để thấy trang lỗi không còn lộ chi tiết.
+- Script lưu `.env` cũ ở `backend/.env.truoc-khi-chuyen` (không đưa lên repo).
+
+So sánh nhanh các file mẫu:
+
+| Biến | Local (`.env.example`) | Staging | Production |
+|---|---|---|---|
+| `APP_ENV` | `local` | `staging` | `production` |
+| `APP_DEBUG` | `true` | `false` | `false` |
+| `LOG_LEVEL` | `debug` | `info` | `warning` |
+| `DB_*` | database máy học | database riêng (bản sao đã che dữ liệu) | database riêng (dữ liệu thật) |
+| `MAIL_*` | ghi vào log | **hộp thư giả (sandbox)** | máy chủ mail thật |
 
 Khi lập Staging hoặc Production, những việc **bắt buộc** khác với máy học:
 
